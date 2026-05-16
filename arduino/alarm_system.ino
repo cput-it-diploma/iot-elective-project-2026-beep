@@ -41,11 +41,9 @@ unsigned long lastPost = 0;
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 
-// SERVER RECOVERY TRACKER
 
 unsigned long lastServerCheck = 0;
 
-// SERVER BOOT CHECK
 bool waitForServer() {
 
   HTTPClient http;
@@ -68,7 +66,6 @@ bool waitForServer() {
   return false;
 }
 
-// =====================================================
 
 void checkServerCommand() {
 
@@ -208,7 +205,7 @@ void postEvent(String type, String status, long distance, String cardUID) {
   http.end();
 }
 
-// MAIN CODE 
+// Main code 
 
 void setup() {
 
@@ -229,13 +226,12 @@ void setup() {
   Serial.print("Connected! IP: ");
   Serial.println(WiFi.localIP());
 
-  //STABILITY DELAY
+  //Stability check
   delay(3000);
 
   SPI.begin();
   rfid.PCD_Init();
-
-  // FIXED BOOT FLOW
+  
   if (waitForServer()) {
     postEvent("status", "armed", -1, "");
   } else {
@@ -248,7 +244,7 @@ void loop() {
   checkServerCommand();
   checkRFID();
 
-  // SERVER RECOVERY LOOP
+  // Sever recovery loop
   if (millis() - lastServerCheck > 10000) {
 
     if (WiFi.status() == WL_CONNECTED) {
