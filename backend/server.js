@@ -8,9 +8,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-/* =========================
-   STATE
-========================= */
 
 let alarmStatus = "armed";
 let history = [];
@@ -19,20 +16,13 @@ let autoMode = true;
 let manualOverride = false;
 
 /* =========================
-   AUTO TIMES
+   Auto arm and disarm times
 ========================= */
 let autoArmTime = "16:00";
 let autoDisarmTime = "06:30";
-
-/* =========================
-   OPTIONAL PERSIST LOG (SAFE ADDITION)
-========================= */
 function logSchedule() {
     console.log("SCHEDULE → ARM:", autoArmTime, "DISARM:", autoDisarmTime);
 }
-/* =========================
-   TIME FORMATTER
-========================= */
 
 function formatTime() {
     return new Date().toLocaleString("en-GB", {
@@ -46,7 +36,7 @@ function formatTime() {
 }
 
 /* =========================
-   HISTORY (UPDATED STRUCTURE)
+   History tracker of Beep
 ========================= */
 
 function addHistory(description, source = "System", status = "Info") {
@@ -61,7 +51,7 @@ function addHistory(description, source = "System", status = "Info") {
 }
 
 /* =========================
-   AUTO SCHEDULER
+   Auto arm and disarm schedule
 ========================= */
 
 setInterval(() => {
@@ -72,7 +62,7 @@ setInterval(() => {
         ":" +
         String(now.getMinutes()).padStart(2, '0');
 
-    // AUTO ARM
+    // Auto arm alarm
     if (currentTime === autoArmTime) {
         if (alarmStatus !== "armed") {
             alarmStatus = "armed";
@@ -84,7 +74,7 @@ setInterval(() => {
         }
     }
 
-    // AUTO DISARM
+    // Auto disarm alarm
     if (currentTime === autoDisarmTime) {
         if (alarmStatus !== "disarmed") {
             alarmStatus = "disarmed";
@@ -96,7 +86,6 @@ setInterval(() => {
         }
     }
 
-    // RE-ENABLE AUTO AFTER MANUAL
     if (manualOverride === true) {
         if (currentTime !== autoDisarmTime) {
             manualOverride = false;
@@ -106,16 +95,12 @@ setInterval(() => {
 
 }, 1000);
 
-/* =========================
-   ESP32 EVENT RECEIVER
-========================= */
-
 app.post("/event", (req, res) => {
     console.log("ESP32 EVENT:", req.body);
 
     lastSeen = Date.now();
 
-    // INTRUSION EVENT
+    // Intrusion detected event
     if (req.body.type === "intrusion") {
 
         let msg = "INTRUSION DETECTED";
@@ -127,7 +112,7 @@ app.post("/event", (req, res) => {
         addHistory(msg, "Sensor", "Triggered");
     }
 
-    // RFID EVENT
+    // RFID card event reader
     if (req.body.type === "rfid_tap" && req.body.status === "toggle") {
 
         alarmStatus =
@@ -146,10 +131,6 @@ app.post("/event", (req, res) => {
     res.json({ success: true });
 });
 
-/* =========================
-   DEVICE STATUS
-========================= */
-
 app.get("/device-status", (req, res) => {
     const online = (Date.now() - lastSeen) < 8000;
 
@@ -159,10 +140,6 @@ app.get("/device-status", (req, res) => {
     });
 });
 
-/* =========================
-   STATUS
-========================= */
-
 app.get("/status", (req, res) => {
     res.json({
         status: alarmStatus,
@@ -171,10 +148,6 @@ app.get("/status", (req, res) => {
         autoMode
     });
 });
-
-/* =========================
-   ARM
-========================= */
 
 app.post("/arm", (req, res) => {
     alarmStatus = "armed";
@@ -186,10 +159,6 @@ app.post("/arm", (req, res) => {
     res.json({ success: true });
 });
 
-/* =========================
-   DISARM
-========================= */
-
 app.post("/disarm", (req, res) => {
     alarmStatus = "disarmed";
     autoMode = false;
@@ -199,10 +168,6 @@ app.post("/disarm", (req, res) => {
 
     res.json({ success: true });
 });
-
-/* =========================
-   TOGGLE
-========================= */
 
 app.post("/toggle", (req, res) => {
     alarmStatus =
@@ -224,7 +189,7 @@ app.post("/toggle", (req, res) => {
 });
 
 /* =========================
-   SET TIMES
+   Set times for auto arm and disarm
 ========================= */
 
 app.post("/set-times", (req, res) => {
@@ -242,25 +207,14 @@ app.post("/set-times", (req, res) => {
     res.json({ success: true, autoArmTime, autoDisarmTime });
 });
 
-/* =========================
-   HISTORY API (NEW FRONTEND ENDPOINT)
-========================= */
 
 app.get("/api/history", (req, res) => {
     res.json(history);
 });
 
-/* =========================
-   LEGACY HISTORY (OPTIONAL KEEP)
-========================= */
-
 app.get("/history", (req, res) => {
     res.json(history);
 });
-
-/* =========================
-   COMMAND
-========================= */
 
 app.get("/command", (req, res) => {
     res.json({ status: alarmStatus });
