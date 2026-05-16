@@ -112,7 +112,7 @@ Saved schedule will appear here
 </span>
 </div>
 
-<!-- TIME PICKER -->
+<!-- Time picker -->
 <div class="flex justify-center gap-10 items-center">
 
 <div class="text-center select-none">
@@ -131,7 +131,7 @@ Saved schedule will appear here
 
 </div>
 
-<!-- MANUAL INPUT -->
+<!-- Manual user input -->
 <div class="mt-6 flex justify-center">
   <input
     id="time-input"
@@ -217,12 +217,12 @@ if (timeInput) {
         updateDisplay();
       }
 
-      saveData(); // triggers same flow as button
+      saveData(); 
     }
   });
 }
 
-/* load server */
+
 async function loadFromServer() {
   try {
     const res = await fetch('/status');
@@ -249,7 +249,7 @@ function loadLocal() {
   }
 }
 
-/* Save */
+
 async function saveData() {
 
   const time =
