@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tableBody.innerHTML = "";
 
-      // ✅ NEW: ensure newest events appear first
       const sortedData = [...data].reverse();
 
       sortedData.forEach(event => {

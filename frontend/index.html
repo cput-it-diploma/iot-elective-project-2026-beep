@@ -34,7 +34,7 @@ body {
 
 <body class="flex h-screen overflow-hidden">
 
-<!-- SIDEBAR -->
+<!-- Side panel navbar for Beep -->
 <aside class="w-64 flex-shrink-0 bg-[#0c0c0c] flex flex-col border-r border-white/5">
 
 <div class="p-8 pb-12">
@@ -69,7 +69,7 @@ body {
 
 </aside>
 
-<!-- MAIN -->
+<!-- Main code section -->
 <main class="flex-1 overflow-y-auto bg-[#0d0d0d] scrollbar-hide">
 
 <header class="sticky top-0 z-10 flex items-center justify-between px-10 py-6 bg-[#0d0d0d]/80 backdrop-blur-sm">
@@ -78,10 +78,10 @@ body {
 
 <div class="px-10 pb-10 space-y-8">
 
-<!-- TOP ROW -->
+<!-- Top row of overview page -->
 <div class="flex gap-6 h-48">
 
-<!-- STATUS CARD -->
+<!-- Card to show status -->
 <div class="flex-1 glass-card rounded-3xl p-8 flex items-center justify-between" id="status-card">
 
 <div class="flex items-center space-x-8">
@@ -117,7 +117,7 @@ id="toggle-btn">
 
 </div>
 
-<!-- NEXT SCHEDULED (OLD STYLE RESTORED) -->
+<!-- Scheduled automatic alarm time -->
 <div class="w-64 glass-card rounded-3xl p-6 flex flex-col justify-between">
 
 <div class="flex justify-between items-start">
@@ -139,7 +139,7 @@ id="toggle-btn">
 
 </div>
 
-<!-- GRID (RESTORED OLD STRUCTURE) -->
+<!-- Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
 <!-- RFID -->
@@ -153,7 +153,7 @@ id="toggle-btn">
 <p class="text-xs text-gray-400">Hold tag near reader to toggle system state</p>
 </div>
 
-<!-- DOOR STATUS -->
+<!-- Door status of where alarm is mounted -->
 <div class="glass-card rounded-3xl p-6 space-y-4">
 <div class="bg-white/5 p-4 rounded-2xl flex items-center justify-between border border-white/5">
 <div class="flex items-center space-x-3">
@@ -165,7 +165,7 @@ Door Locked / Secure
 </div>
 </div>
 
-<!-- AUTH STATUS -->
+<!-- Authorizationn status -->
 <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
 <div>
 <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Authorization Status</p>
@@ -181,7 +181,7 @@ Door Locked / Secure
 
 </div>
 
-<!-- ========================= RECENT HISTORY PREVIEW ========================= -->
+<!-- ========================= Three most recent history items ========================= -->
 <div class="glass-card rounded-3xl border border-white/5 overflow-hidden">
 
   <div class="p-6 flex justify-between items-center border-b border-white/5">
@@ -196,7 +196,6 @@ Door Locked / Secure
   </div>
 
   <div id="history-preview" class="divide-y divide-white/5">
-    <!-- JS injects here -->
   </div>
 
 </div>
@@ -208,7 +207,6 @@ Door Locked / Secure
 
 </main>
 
-<!-- ========================= NEW FEATURE SCRIPT (ADDED ONLY) ========================= -->
 <script>
 async function loadRecentHistory() {
   try {
@@ -218,7 +216,7 @@ async function loadRecentHistory() {
     const container = document.getElementById("history-preview");
     if (!container) return;
 
-    // take last 3 events
+
     const recent = data.slice(-3).reverse();
 
     container.innerHTML = "";
@@ -243,7 +241,6 @@ async function loadRecentHistory() {
   }
 }
 
-// auto refresh so it updates when history changes
 loadRecentHistory();
 setInterval(loadRecentHistory, 4000);
 </script>

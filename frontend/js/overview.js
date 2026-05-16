@@ -1,6 +1,5 @@
 let isArmed = true;
 
-// DOM elements
 const toggleBtn = document.getElementById('toggle-btn');
 const btnText = document.getElementById('btn-text');
 
@@ -17,9 +16,6 @@ const doorStatusText = document.getElementById('door-status-text');
 
 const nextScheduled = document.getElementById('next-scheduled');
 
-/* =========================
-   APPLY UI STATE
-========================= */
 function applyUI(state) {
   isArmed = state === "armed";
 
@@ -67,9 +63,6 @@ function applyUI(state) {
   }
 }
 
-/* =========================
-   GET STATUS FROM SERVER
-========================= */
 async function fetchStatus() {
   try {
     const res = await fetch('/status');
@@ -87,9 +80,6 @@ async function fetchStatus() {
   }
 }
 
-/* =========================
-   BUTTON TOGGLE (SERVER CONTROL)
-========================= */
 toggleBtn.addEventListener('click', async () => {
   try {
     const res = await fetch('/toggle', {
@@ -106,12 +96,6 @@ toggleBtn.addEventListener('click', async () => {
   }
 });
 
-/* =========================
-   INITIAL LOAD
-========================= */
 fetchStatus();
 
-/* =========================
-   AUTO SYNC (RFID + SERVER + SCHEDULER)
-========================= */
 setInterval(fetchStatus, 2000);
