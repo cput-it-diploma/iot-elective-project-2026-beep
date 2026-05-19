@@ -8,10 +8,9 @@
 
 ## 📋 Table of Contents
 
-1. Project Title: Beep Boop (RFID Enabled Alarm System)
-2. Group Name: BEEP
-3. Presentation Date: 20 May 2026
-(#project-idea--problem-statement)
+1. [Project Overview](#project-overview)
+2. [Group Members](#group-members)
+3. [Project Idea & Problem Statement](#project-idea--problem-statement)
 4. [System Architecture & Design](#system-architecture--design)
 5. [Hardware Components](#hardware-components)
 6. [Software & Technologies](#software--technologies)
