@@ -347,32 +347,44 @@ void loop() {
 
 ## 🎥 Project Demonstration
 
-- 📹 **Demo Video:** [Insert link here]
-- 📊 **Presentation Slides:** [Insert link here]
-- 🔗 **Live Dashboard (if applicable):** [Insert link here]
+📹 **Demo Video:**
+- [Viewable Version](https://youtu.be/BGc79pOvFxQ)
+- [Download Demo](./demo.mp4)
+
+📊 **Presentation Slides:**
+- [Viewable Version](https://mycputac-my.sharepoint.com/:p:/g/personal/240046935_mycput_ac_za/IQDBSjK8qJIhRIm5voMISQpPAYnzsj5ny-B-F4JnMtbNsts?e=sfmLxm)
 
 ---
 
 ## 📚 References
 
-### Assembling
-1. Velxio — Free Online Circuit & Arduino Simulator | SPICE · ESP32 (https://velxio.dev/editor) — Used to play around and figure out pins for Assembling Hardware
+### 🔧 Assembling
+1. [Velxio — Free Online Circuit & Arduino Simulator](https://velxio.dev/editor)  
+   *Used to experiment with pin configurations for assembling hardware.*
 
-### 3D Modelling
-1. 3d print box (https://www.youtube.com/watch?v=CD1XSw5toJk) — used to guide how to use Fusion 360 software
+### 🖼️ 3D Modelling
+1. [3D Print Box – YouTube](https://www.youtube.com/watch?v=CD1XSw5toJk)  
+   *Guide on using Fusion 360 software for 3D modelling.*
 
-2. Arduino case (https://youtu.be/LJtJcum1YjE?si=QVMqEfUTdd40qZLt) — Autodesk Fusion software guide
+2. [Arduino Case – YouTube](https://youtu.be/LJtJcum1YjE?si=QVMqEfUTdd40qZLt)  
+   *Autodesk Fusion tutorial for designing Arduino enclosures.*
 
-### Programming ESP32 & Dashboard
-1. Tap to Trigger: RFID + ESP32 + OLED Tutorial = AWESOME (https://www.youtube.com/watch?v=7sqpxrMZuvo) — YouTube Video used to guide connecting our ESP32 and RFID
+### 💻 Programming ESP32 & Dashboard
+1. [Tap to Trigger: RFID + ESP32 + OLED Tutorial](https://www.youtube.com/watch?v=7sqpxrMZuvo)  
+   *YouTube tutorial guiding ESP32 and RFID integration.*
 
-2. Installing ESP32 in Arduino IDE (Windows, Mac OS X, Linux) | Random Nerd Tutorials (•	https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/ ) — Used to install Arduino IDE
+2. [Installing ESP32 in Arduino IDE – Random Nerd Tutorials](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/)  
+   *Step-by-step instructions for setting up ESP32 in Arduino IDE.*
 
-3. Ultrasonic security system | Arduino Project Hub (https://projecthub.arduino.cc/nimishac/ultrasonic-security-system-92e684?_gl=1*12u56cr*_up*MQ..*_ga*NTM3NzQyNDY5LjE3NzkxMTk1MDA.*_ga_NEXN8H46L5*czE3NzkxMTk0OTgkbzEkZzAkdDE3NzkxMTk0OTgkajYwJGwwJGgxMjI5MzEwNzE5) — Used as reference for code
+3. [Ultrasonic Security System – Arduino Project Hub](https://projecthub.arduino.cc/nimishac/ultrasonic-security-system-92e684?_gl=1*12u56cr*_up*MQ..*_ga*NTM3NzQyNDY5LjE3NzkxMTk1MDA.*_ga_NEXN8H46L5*czE3NzkxMTk0OTgkbzEkZzAkdDE3NzkxMTk0OTgkajYwJGwwJGgxMjI5MzEwNzE5)  
+   *Reference project for ultrasonic sensor code implementation.*
 
-4. FreeCodeCamp Node.js and Express.js - Full Backend Tutorial (https://www.youtube.com/watch?v=4vd-36QpFRc — Used for Dashboard Backend reference
+4. [Node.js and Express.js Full Backend Tutorial – FreeCodeCamp](https://www.youtube.com/watch?v=4vd-36QpFRc)  
+   *Comprehensive backend development tutorial used for dashboard setup.*
 
-5. ESP32 GPIO pins, differences - 3rd Party Boards - Arduino Forum (https://forum.arduino.cc/t/esp32-gpio-pins-differences/993683) — Used for physical vs. logical pin reference
+5. [ESP32 GPIO Pins Differences – Arduino Forum](https://forum.arduino.cc/t/esp32-gpio-pins-differences/993683)  
+   *Discussion on physical vs. logical pin differences for ESP32 boards.*
+
 
 ---
 
