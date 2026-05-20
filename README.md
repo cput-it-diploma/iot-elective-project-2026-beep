@@ -336,10 +336,12 @@ void loop() {
 
 ## ⚠️ Challenges & Solutions
 
-| Challenge Encountered | Solution Applied |
-|---|---|
-| [e.g. Wi-Fi connection drops] | [e.g. Added reconnect logic] |
-| [e.g. Noisy sensor readings] | [e.g. Applied moving average filter] |
+| Challenges Encountered                                      | Solution Applied                                                                 |
+|------------------------------------------------------------|----------------------------------------------------------------------------------|
+| RFID tag not always registering immediately.               | Improved input handling and secured proper debounce timing for reliable reads.  |
+| Delayed communication between ESP32 and backend server.    | Optimised API requests and ensured stable HTTP endpoint handling using Express.js. |
+| Wi-Fi connection instability on ESP32                      | Implemented automatic reconnection logic to restore network after drops.        |
+
 
 ---
 
