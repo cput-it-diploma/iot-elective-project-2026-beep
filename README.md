@@ -63,8 +63,7 @@
 | Student Name | Student Number | Role / Responsibility |
 |---|---|---|
 | Raul Ja'aim Everts | 230270565 | Hardware Lead/Assembly |
-| Ryle Peter May  | 230333907 | oftware Lead & ESP32 Programmer |
-| Chaz Kalo Rudolph | 230893287 |  |
+| Ryle Peter May  | 230333907 | Software Lead & ESP32 Programmer |
 | Chaz Kalo Rudolph | 230893287 | Dashboard Frontend & 3D Modelling |
 | David Daniel Sepkitt  | 240046935 | Dashboard Backend |
 | Robyn Dominique Stevens | 222201789 | Documentation Lead & ESP32 Programmer |
@@ -118,10 +117,10 @@ This ensures that there is flexibility on how users control the device.
 
 ## 🏗️ System Architecture & Design
 
-![System Architecture Diagram](images/architecture_diagram.png)
+<img width="1185" height="736" alt="Screenshot 2026-05-20 090458" src="https://github.com/user-attachments/assets/6f3c6f63-c07d-4308-9bb6-2f593f6dee43" />
 
 ### Design Decisions
-> _Explain the key design decisions your group made._
+The firmware was built around a non-blocking architecture. Rather than using delay() for the buzzer, a millis() -based interval in soundAlarm() keeps the main loop responsive, ensuring RFID reads and server polling continue uninterrupted while the alarm sounds. The ESP32’s native WI-FI was leveraged over the SPI bus simultaneously alongside the RFID RC522, with a deliberate 3-second stability delay after Wi-Fi connection to allow the network stack to settle before SPI is Initialized. Communication with the backend follows a polling model over HTTP rather than a persistent socket; the ESP32 checks/command every loop cycle for arm/disarm instructions and posts events to /event, keeping the server stateless and the firmware simple. The 40cm trigger threshold on the HC-SR04 was chosen as a practical proximity boundary, with distance data posted every 5 seconds to avoid flooding the server. The buzzer is driven through a BC547 transistor to safely switch the 5V load from a 3.3V GPIO pin, and RFID authorization is handled entirely on-device via hardcoded UID byte comparison, meaning no network round-trip is required for physical access control.
 
 ---
 
@@ -158,7 +157,8 @@ This ensures that there is flexibility on how users control the device.
 
 ## 🔌 Circuit Diagram / Wiring
 
-![Circuit Diagram](images/circuit_diagram.png)
+<img width="1302" height="816" alt="Screenshot 2026-05-20 084853" src="https://github.com/user-attachments/assets/5a0a4a3f-c018-473d-9e4c-5afef2234f3d" />
+
 
 ### Wiring
 
@@ -182,27 +182,28 @@ This ensures that there is flexibility on how users control the device.
 ### Step 1: [Step Title]
 > Main devices (ESP32, HC-SR04, RFID-RC522) are inserted into the breadboard
 
-![Step 1 Photo](images/build_step1.jpg)
+<img width="1599" height="1599" alt="WhatsApp Image 2026-05-20 at 07 48 31" src="https://github.com/user-attachments/assets/8ded9935-165a-4769-8fdd-67b20576d1ba" />
 
 ### Step 2: [Step Title]
 > Smaller parts (buzzer, resistor, transistor) are inserted into the board.
 
-![Step 2 Photo](images/build_step2.jpg)
+<img width="1599" height="1599" alt="WhatsApp Image 2026-05-20 at 07 48 33" src="https://github.com/user-attachments/assets/1634be01-1275-4c4d-8d88-44bb21f01f42" />
 
 ### Step 3: [Step Title]
 > Cables are inserted and connected to all devices that require 3.3V (ESP, RFID) for power and grounding.
 
-![Step 3 Photo](images/build_step3.jpg)
+<img width="1599" height="1599" alt="WhatsApp Image 2026-05-20 at 07 48 32" src="https://github.com/user-attachments/assets/a98b3c0e-c084-4d8a-adb9-a2bc7f85c1cc" />
 
 ### Step 4: [Step Title]
 > Cables are inserted and connected to all devices that require 5V (Buzzer, Ultrasonic sensor) for power and grounding.
 
-![Step 4 Photo](images/build_step4.jpg)
+<img width="1599" height="1599" alt="WhatsApp Image 2026-05-20 at 07 48 32 (1)" src="https://github.com/user-attachments/assets/be439dbb-9383-4f55-b3f9-6e7041705887" />
 
 ### Step 5: [Step Title]
 > All secondary and GPIO pins/connections are inserted.
 
-![Step 5 Photo](images/build_step5.jpg)
+<img width="1599" height="1599" alt="WhatsApp Image 2026-05-20 at 07 48 32 (2)" src="https://github.com/user-attachments/assets/901ce697-9773-433a-b545-89ecc941e582" />
+
 ---
 
 ## 🖥️ Code Documentation
@@ -314,7 +315,6 @@ void loop() {
 | **postEvent()** | Sends an HTTP POST request to `SERVER_URL` with a JSON body containing the event type, alarm status, distance reading, and optionally a `cardUID` string. Only runs if WiFi is connected. Prints the HTTP response code to Serial for debugging |
 | **waitForServer()** | Called once in `setup()`. Attempts to reach the server via a GET request to `COMMAND_URL` up to 10 times with 1 second between attempts. Returns `true` once the server responds with HTTP 200 or `false` if all attempts fail, allowing the device to boot even if the server is slow |
 | **CheckServerCommand()** | Polls `COMMAND_URL` with a GET request and reads the JSON response. If the payload contains "disarmed" it sets `alarmArmed = true`. This allows the dashboard to remotely control the device. The ESP32 checks every loop cycle and updates its state accordingly |
-``
 
 ---
 
